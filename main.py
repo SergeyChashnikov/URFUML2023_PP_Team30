@@ -1,20 +1,49 @@
-import torch
-from transformers import T5ForConditionalGeneration, T5Tokenizer
-tokenizer = T5Tokenizer.from_pretrained("cointegrated/rut5-base-multitask")
-model = T5ForConditionalGeneration.from_pretrained("cointegrated/rut5-base-multitask")
+from app import session, components, constants
+import model
 
 
-def generate(text, **kwargs):
-    inputs = tokenizer(text, return_tensors='pt')
-    with torch.no_grad():
-        hypotheses = model.generate(**inputs, num_beams=5, **kwargs)
-    return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
+def main():
+  # Инициализация состояния приложения
+  session.init()
+
+  # Рисуем шапку + описание
+  components.header(
+    constants.LANG_PACK.get("title"),
+    constants.LANG_PACK.get("subtitle"),
+    constants.LANG_PACK.get("description"),
+  )
+
+  # Подгружаем и кешируем модельку
+  with components.spinner(constants.LANG_PACK.get("loading_model_text")):
+    model.loadmodel()
+
+  # Получаем состояние приложения
+  state = session.get_state()
+  # Рисуем основные компоненты приложения, используя состояние
+  text_area_data = components.text_area(
+    constants.LANG_PACK.get("text_area_label"),
+    state.text_area_disabled,
+    constants.STATE_KEY_TEXT_AREA
+  )
+  file_data = components.file_uploader(
+    constants.LANG_PACK.get("file_uploader_label"),
+    state.file_uploader_disabled,
+    constants.STATE_KEY_FILE_UPLOADER
+  )
+  btn = components.button(constants.LANG_PACK.get("btn_start_label"))
+  
+  # Получаем критерии (пропсы) для нашей модели, в нашем случае это просто текст
+  criteria = text_area_data or file_data
+
+  # Если все ок, то передаем в функцию процессинга, если нет, то пишем что не так
+  if bool(criteria) and btn:
+    with components.spinner(text=constants.LANG_PACK.get("loading_result_text")):
+      res = model.process(criteria)
+
+    components.results(constants.LANG_PACK.get("result_text"), res)
+  elif not bool(criteria) and btn:
+    components.info(constants.LANG_PACK.get("empty_input_text"))
 
 
-text = """Файловая система связывает носитель информации, с одной стороны, и API для доступа к файлам, с другой. Когда прикладная программа обращается к файлу, она не имеет никакого представления о том, каким образом расположена информация в конкретном файле. Все, что знает программа — это имя файла, его размер и атрибуты. Эти данные она получает от драйвера файловой системы. Именно файловая система устанавливает, где и как будет записан файл на физическом носителе (например, жестком диске).
-
-С точки зрения операционной системы, весь диск представляет из себя набор кластеров размером от 512 байт. Драйверы файловой системы организуют кластеры в файлы и каталоги, реально являющиеся файлами, содержащими список файлов в этом каталоге. Эти же драйверы отслеживают, какие из кластеров в настоящее время используются, какие свободны, какие помечены как неисправные.
-
-Однако файловая система необязательно напрямую связана с физическим носителем информации. Существуют виртуальные и сетевые файловые системы, которые являются лишь способом доступа к файлам, находящимся на удалённом компьютере."""
-
-print(generate(f'simplify | {text}', max_length=200, length_penalty=3, no_repeat_ngram_size=3))
+if __name__ == "__main__":
+    main()
