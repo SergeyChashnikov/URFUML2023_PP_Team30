@@ -15,7 +15,7 @@ def main():
 
   # Подгружаем и кешируем модельку
   with components.spinner(constants.LANG_PACK.get("loading_model_text")):
-    model.loadmodel()
+    tokenizer, model_rut5 = model.loadmodel()
 
   # Получаем состояние приложения
   state = session.get_state()
@@ -38,7 +38,7 @@ def main():
   # Если все ок, то передаем в функцию процессинга, если нет, то пишем что не так
   if bool(criteria) and btn:
     with components.spinner(text=constants.LANG_PACK.get("loading_result_text")):
-      res = model.process(criteria)
+      res = model.process(f'simplify | {criteria}', tokenizer, model_rut5)
 
     components.results(constants.LANG_PACK.get("result_text"), res)
   elif not bool(criteria) and btn:
