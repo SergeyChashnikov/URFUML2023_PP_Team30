@@ -14,5 +14,5 @@ def loadmodel():
 def process(criteria: str, tokenizer, model_rut5):
   inputs = tokenizer(criteria, return_tensors='pt')
   with torch.no_grad():
-    hypotheses = model_rut5.generate(**inputs, num_beams=5, max_length=300, length_penalty=2.5, no_repeat_ngram_size=3)
+    hypotheses = model_rut5.generate(**inputs, num_beams=5, min_length=200, max_length=500, no_repeat_ngram_size=3)
   return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
