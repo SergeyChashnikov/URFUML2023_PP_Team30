@@ -1,8 +1,8 @@
-import streamlit as st
-import torch
-from transformers import T5ForConditionalGeneration, T5Tokenizer
+import streamlit as st  # Импорт streamlit
+import torch  # Импорт torch для работы модели
+from transformers import T5ForConditionalGeneration, T5Tokenizer  # Импорт трансформеров для работы модели
 
-# Тут будет встраиваться модель
+# Загружаем модель и кэшируем ее через декоратор
 @st.cache_resource
 def loadmodel():
   tokenizer = T5Tokenizer.from_pretrained("cointegrated/rut5-base-multitask")
@@ -10,7 +10,7 @@ def loadmodel():
   return tokenizer, model_rut5
 
 
-# Тут будет распологаться процессинг
+# Процессинг. Передаем входной текст в модель и получаем результат обработки.
 def process(criteria: str, tokenizer, model_rut5):
   inputs = tokenizer(criteria, return_tensors='pt')
   with torch.no_grad():
