@@ -9,7 +9,7 @@ def header(title: str, subheader: str, text: str):
 
 def results(label: str, text: str):
   st.text(label)
-  st.text(text)
+  st.write(text)
 
 
 def file_uploader(label: str, disabled: bool, state_key: str) -> str:
