@@ -19,7 +19,11 @@ def main():
 
   # Получаем состояние приложения
   state = session.get_state()
-  # Рисуем основные компоненты приложения, используя состояние
+
+  # Рисуем основные компоненты приложения, используя состояние, то есть если мы ввели текст,
+  # то сетим в состояние ключ file_uploader_disabled: True, и далее поле загрузки файлом которое
+  # следит за этим полем в состоянии - отключается,
+  # и так же в обратном порядке для text_area с ключем text_area_disabled
   text_area_data = components.text_area(
     constants.LANG_PACK.get("text_area_label"),
     state.text_area_disabled,
