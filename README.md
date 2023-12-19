@@ -31,12 +31,12 @@ streamlit run src/main.py
 
 ## Команда
 
-**Ильин В.Б.** – лидер проекта (https://github.com/Viktor-125142).
-**Кравцов А.В.** – инженер по машинному обучению (https://github.com/Baddogel).
-**Ефимович Е.А.** – Full Stack-разработчик (https://github.com/johnneon).
-**Крючков В.В.** – документалист/технический писатель (https://github.com/Tifles).
-**Чашников С.Ю.**– Инженер MLOps (https://github.com/SergeyChashnikov). 
-**Салов А.С.** – Scrum-мастер (https://github.com/TonyStranger404).
+**Ильин В.Б.** – лидер проекта (https://github.com/Viktor-125142).     
+**Кравцов А.В.** – инженер по машинному обучению (https://github.com/Baddogel).      
+**Ефимович Е.А.** – Full Stack-разработчик (https://github.com/johnneon).     
+**Крючков В.В.** – документалист/технический писатель (https://github.com/Tifles).    
+**Чашников С.Ю.**– Инженер MLOps (https://github.com/SergeyChashnikov).     
+**Салов А.С.** – Scrum-мастер (https://github.com/TonyStranger404).    
 
 ## Используемая модель
 
