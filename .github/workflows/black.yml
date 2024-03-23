@@ -11,5 +11,4 @@ jobs:
         with:
           options: "--diff"
       - uses: psf/black@stable
-        with:
-          options: "--safe"
+        
