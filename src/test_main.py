@@ -52,5 +52,3 @@ def test_button():
     at.run(timeout=30)
 
     assert at.button[0].label == "Запуск"
-
-test_text_area()
