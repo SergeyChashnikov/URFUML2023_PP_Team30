@@ -2,7 +2,6 @@ from streamlit.testing.v1 import AppTest
 
 
 def test_text_area():
-
     at = AppTest.from_file("main.py")
 
     at.run(timeout=30)
@@ -40,7 +39,6 @@ def test_text_area():
 
 
 def test_title():
-
     at = AppTest.from_file("main.py")
 
     at.run(timeout=30)
@@ -49,7 +47,6 @@ def test_title():
 
 
 def test_button():
-
     at = AppTest.from_file("main.py")
 
     at.run(timeout=30)
