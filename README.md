@@ -22,7 +22,7 @@ pip install -r requirements.txt
 ```
  - запуск стримлит приложения
 ```bash
-streamlit run src/main.py
+streamlit run src/Home_page.py
 ```
 ## Использование
 
