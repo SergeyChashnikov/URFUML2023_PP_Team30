@@ -55,7 +55,7 @@ text = text_area_data or file_data
 
 if text and btn:
     with components.spinner(text=constants.LANG_PACK_TRANSLITE.get("loading_result_text")):
-        res = translate(f"translate ru-en | {text}")
+        res = translate(f"translate ru-en | {text}", tokenizer, model_rut5)
         # st.write(res)
 
     components.results(constants.LANG_PACK_TRANSLITE.get("result_text"), res)

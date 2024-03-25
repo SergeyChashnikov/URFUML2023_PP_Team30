@@ -30,7 +30,7 @@ def process(criteria: str, tokenizer, model_rut5):
     return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
 
 
-def translate(text: str):
+def translate(text: str, tokenizer, model_rut5):
     inputs = tokenizer(text, return_tensors="pt")
 
     with torch.no_grad():
