@@ -28,3 +28,18 @@ def process(criteria: str, tokenizer, model_rut5):
             no_repeat_ngram_size=3
         )
     return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
+
+
+def translate(text: str):
+    inputs = tokenizer(text, return_tensors="pt")
+
+    with torch.no_grad():
+        hypotheses = model_rut5.generate(**inputs, num_beams=5)
+
+    translated_text = tokenizer.decode(hypotheses[0], skip_special_tokens=True)
+    print(translated_text)
+
+    return translated_text
+
+
+
