@@ -3,8 +3,8 @@ import streamlit as st
 
 # def page():
 st.set_page_config(
-    page_title="Hello",
-    page_icon="👋",
+    page_title="Owl",
+    page_icon="🦉",
 )
 st.markdown("# 👈 тебе сюда ")
 st.header("An owl")
