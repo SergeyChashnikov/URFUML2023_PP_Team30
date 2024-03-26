@@ -1,17 +1,20 @@
 import streamlit as st
 from src.app import components, session, constants
-from src.model import loadmodel, translate
-
-from transformers import (
-    T5ForConditionalGeneration,
-    T5Tokenizer,
-)
+from src.model import (loadmodel_trans_ru_en,
+                       interpreter,
+                       loadmodel_trans_en_ru)
 
 
 st.set_page_config(
     page_title="Translator Page",
     page_icon="🌏",
 )
+
+
+# Представление для выбора направления перевода
+option = st.select_slider(
+    'Выберите направление перевода:',
+    options=['Русский-Английский', 'Английский-Русский'])
 
 
 session.init()
@@ -24,9 +27,12 @@ components.header(
     constants.LANG_PACK_TRANSLITE.get("description"),
 )
 
-with components.spinner(constants.LANG_PACK_TRANSLITE.get("loading_model_text")):
-    tokenizer, model_rut5 = loadmodel()
-
+if option == 'Русский-Английский':
+    with st.spinner('Загрузка модели для перевода с русского на английский...'):
+        tokenizer, model = loadmodel_trans_ru_en()
+elif option == 'Английский-Русский':
+    with st.spinner('Загрузка модели для перевода с английского на русский...'):
+        tokenizer, model = loadmodel_trans_en_ru()
 
 
 # components.info("В общем страница переводчика например")
@@ -55,15 +61,15 @@ text = text_area_data or file_data
 
 if text and btn:
     with components.spinner(text=constants.LANG_PACK_TRANSLITE.get("loading_result_text")):
-        res = translate(f"translate ru-en | {text}", tokenizer, model_rut5)
-        # st.write(res)
+        res = interpreter(text, tokenizer, model)
 
     components.results(constants.LANG_PACK_TRANSLITE.get("result_text"), res)
 elif not text and btn:
     components.info(constants.LANG_PACK_TRANSLITE.get("empty_input_text"))
 st.sidebar.markdown(
     """
-    тут кайф описание для переводчика от автора 
+    Переводчик
+    Создано в рамках Проектного практикума «Персональный помощник для студентов». 
     """
 )
 
