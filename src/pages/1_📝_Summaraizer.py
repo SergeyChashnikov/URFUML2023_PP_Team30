@@ -1,6 +1,6 @@
 import streamlit as st
-from src.app import session, components, constants
-from src.model import loadmodel, process
+from app import session, components, constants
+from model import loadmodel, process
 
 
 st.set_page_config(
