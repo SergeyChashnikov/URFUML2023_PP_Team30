@@ -21,14 +21,14 @@ def loadmodel():
 
 
 @st.cache_resource
-def loadmodel_trans_ru_en():
+def loadmodel_translation_ru_en():
     tokenizer = FSMTTokenizer.from_pretrained("facebook/wmt19-ru-en")
     model = FSMTForConditionalGeneration.from_pretrained("facebook/wmt19-ru-en")
     return tokenizer, model
 
 
 @st.cache_resource
-def loadmodel_trans_en_ru():
+def loadmodel_translation_en_ru():
     tokenizer = FSMTTokenizer.from_pretrained("facebook/wmt19-en-ru")
     model = FSMTForConditionalGeneration.from_pretrained("facebook/wmt19-en-ru")
     return tokenizer, model

@@ -10,9 +10,9 @@ from src.app.constants import (LANG_PACK_TRANSLITE,
 from src.app.session import (init,
                              get_state)
 
-from src.model import (loadmodel_trans_ru_en,
+from src.model import (loadmodel_translation_ru_en,
                        interpreter,
-                       loadmodel_trans_en_ru)
+                       loadmodel_translation_en_ru)
 
 
 st.set_page_config(
@@ -41,12 +41,12 @@ if option == 'Русский-Английский':
     with st.spinner(
             'Загрузка модели для перевода с русского на английский...'
     ):
-        tokenizer, model = loadmodel_trans_ru_en()
+        tokenizer, model = loadmodel_translation_ru_en()
 elif option == 'Английский-Русский':
     with st.spinner(
             'Загрузка модели для перевода с английского на русский...'
     ):
-        tokenizer, model = loadmodel_trans_en_ru()
+        tokenizer, model = loadmodel_translation_en_ru()
 
 
 # components.info("В общем страница переводчика например")
