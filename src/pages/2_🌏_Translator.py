@@ -1,16 +1,16 @@
 import streamlit as st
 
-from src.app.components import (header, results, file_uploader,
+from components import (header, results, file_uploader,
                                 text_area, spinner, button, info)
 
-from src.app.constants import (LANG_PACK_TRANSLITE,
+from constants import (LANG_PACK_TRANSLITE,
                                STATE_KEY_FILE_UPLOADER,
                                STATE_KEY_TEXT_AREA)
 
-from src.app.session import (init,
+from session import (init,
                              get_state)
 
-from src.model import (loadmodel_translation_ru_en,
+from model import (loadmodel_translation_ru_en,
                        interpreter,
                        loadmodel_translation_en_ru)
 
@@ -24,7 +24,8 @@ st.set_page_config(
 # Представление для выбора направления перевода
 option = st.select_slider(
     'Выберите направление перевода:',
-    options=['Русский-Английский', 'Английский-Русский'])
+    options=[LANG_PACK_TRANSLITE.get("ru-en"),
+             LANG_PACK_TRANSLITE.get("en-ru")])
 
 
 init()
