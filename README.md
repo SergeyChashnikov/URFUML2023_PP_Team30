@@ -20,9 +20,13 @@
 ```bash
 pip install -r requirements.txt
 ```
- - запуск стримлит приложения
+ - запуск стримлит приложения можно 2 способами
 ```bash
 streamlit run src/Home_page.py
+```
+- или напрямую из модуля run_app.py
+```
+/URFUML2023_PP_Team30/src/run_app.py
 ```
 ## Использование
 
@@ -52,4 +56,4 @@ streamlit run src/Home_page.py
     - `constants.py` - константы
     - `session.py` - работа с состоянием приложения
 
-
+    
