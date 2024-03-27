@@ -15,10 +15,7 @@ def test_translation():
     at.button[0].click().run(timeout=60)
 
     # Проверяем, что результат перевода отображается на странице
-    # Здесь нужно заменить "Expected translation" на ожидаемый результат перевода
     assert (
              at.markdown[1].value
              == """Hello"""
              )
-
-
