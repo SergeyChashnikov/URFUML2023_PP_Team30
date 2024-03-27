@@ -1,16 +1,16 @@
 import streamlit as st
 
-from components import (header, results, file_uploader,
+from src.app.components import (header, results, file_uploader,
                                 text_area, spinner, button, info)
 
-from constants import (LANG_PACK_TRANSLITE,
+from src.app.constants import (LANG_PACK_TRANSLITE,
                                STATE_KEY_FILE_UPLOADER,
                                STATE_KEY_TEXT_AREA)
 
-from session import (init,
+from src.app.session import (init,
                              get_state)
 
-from model import (loadmodel_translation_ru_en,
+from src.model import (loadmodel_translation_ru_en,
                        interpreter,
                        loadmodel_translation_en_ru)
 
