@@ -3,12 +3,16 @@ import torch  # Импорт torch для работы модели
 from transformers import (
     T5ForConditionalGeneration,
     T5Tokenizer,
-)  # Импорт трансформеров для работы модели
+)
+from transformers import (
+    FSMTForConditionalGeneration,
+    FSMTTokenizer
+)# Импорт трансформеров для работы модели
 
 
 # Загружаем модель и кэшируем ее через декоратор
 @st.cache_resource
-def loadmodel():
+def loadmodel_summarization():
     tokenizer = T5Tokenizer.from_pretrained("cointegrated/rut5-base-multitask")
     model_rut5 = T5ForConditionalGeneration.from_pretrained(
         "cointegrated/rut5-base-multitask"
@@ -16,8 +20,22 @@ def loadmodel():
     return tokenizer, model_rut5
 
 
+@st.cache_resource
+def loadmodel_translation_ru_en():
+    tokenizer = FSMTTokenizer.from_pretrained("facebook/wmt19-ru-en")
+    model = FSMTForConditionalGeneration.from_pretrained("facebook/wmt19-ru-en")
+    return tokenizer, model
+
+
+@st.cache_resource
+def loadmodel_translation_en_ru():
+    tokenizer = FSMTTokenizer.from_pretrained("facebook/wmt19-en-ru")
+    model = FSMTForConditionalGeneration.from_pretrained("facebook/wmt19-en-ru")
+    return tokenizer, model
+
+
 # Процессинг. Передаем входной текст в модель и получаем результат обработки.
-def process(criteria: str, tokenizer, model_rut5):
+def processing_summarization(criteria: str, tokenizer, model_rut5):
     inputs = tokenizer(criteria, return_tensors="pt")
     with torch.no_grad():
         hypotheses = model_rut5.generate(
