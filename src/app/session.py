@@ -5,7 +5,7 @@
 """
 
 import streamlit as st
-from app import constants
+from . import constants
 
 
 def init_state():
@@ -27,10 +27,5 @@ def get_state():
 
 def init():
     """Инициализация состояния приложения"""
-    st.set_page_config(
-        page_title=constants.LANG_PACK.get("title"),
-        page_icon="🧊",
-        layout="centered",
-    )
-
     init_state()
+
