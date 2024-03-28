@@ -6,8 +6,8 @@ from transformers import (
 )
 from transformers import (
     FSMTForConditionalGeneration,
-    FSMTTokenizer
-)# Импорт трансформеров для работы модели
+    FSMTTokenizer,
+)  # Импорт трансформеров для работы модели
 
 
 # Загружаем модель и кэшируем ее через декоратор
@@ -53,5 +53,3 @@ def interpreter(text: str, tokenizer, model):
     outputs = model.generate(input_ids)
     decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return decoded
-
-

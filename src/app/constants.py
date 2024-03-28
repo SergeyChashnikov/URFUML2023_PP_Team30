@@ -30,7 +30,7 @@ LANG_PACK_TRANSLITE = {
     "empty_input_text": "Tip: не хватает данных, загрузите пожалуйста файл или введите текств поле :)",
     "file_uploader_label": "Или загрузите файл",
     "ru-en": "Русский-Английский",
-    "en-ru": "Английский-Русский"
+    "en-ru": "Английский-Русский",
 }
 
 STATE_KEY_FILE_UPLOADER = "file_uploader"

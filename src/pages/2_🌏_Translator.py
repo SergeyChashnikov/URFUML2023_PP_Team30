@@ -1,18 +1,24 @@
 import streamlit as st
 
-from app.components import (header, results, file_uploader,
-                                text_area, spinner, button, info)
+from app.components import (
+    header,
+    results,
+    file_uploader,
+    text_area,
+    spinner,
+    button,
+    info,
+)
 
-from app.constants import (LANG_PACK_TRANSLITE,
-                               STATE_KEY_FILE_UPLOADER,
-                               STATE_KEY_TEXT_AREA)
+from app.constants import (
+    LANG_PACK_TRANSLITE,
+    STATE_KEY_FILE_UPLOADER,
+    STATE_KEY_TEXT_AREA,
+)
 
-from app.session import (init,
-                             get_state)
+from app.session import init, get_state
 
-from model import (loadmodel_translation_ru_en,
-                       interpreter,
-                       loadmodel_translation_en_ru)
+from model import loadmodel_translation_ru_en, interpreter, loadmodel_translation_en_ru
 
 
 st.set_page_config(
@@ -23,9 +29,9 @@ st.set_page_config(
 
 # Представление для выбора направления перевода
 option = st.select_slider(
-    'Выберите направление перевода:',
-    options=[LANG_PACK_TRANSLITE.get("ru-en"),
-             LANG_PACK_TRANSLITE.get("en-ru")])
+    "Выберите направление перевода:",
+    options=[LANG_PACK_TRANSLITE.get("ru-en"), LANG_PACK_TRANSLITE.get("en-ru")],
+)
 
 
 init()
@@ -38,15 +44,11 @@ header(
     LANG_PACK_TRANSLITE.get("description"),
 )
 
-if option == 'Русский-Английский':
-    with st.spinner(
-            'Загрузка модели для перевода с русского на английский...'
-    ):
+if option == "Русский-Английский":
+    with st.spinner("Загрузка модели для перевода с русского на английский..."):
         tokenizer, model = loadmodel_translation_ru_en()
-elif option == 'Английский-Русский':
-    with st.spinner(
-            'Загрузка модели для перевода с английского на русский...'
-    ):
+elif option == "Английский-Русский":
+    with st.spinner("Загрузка модели для перевода с английского на русский..."):
         tokenizer, model = loadmodel_translation_en_ru()
 
 

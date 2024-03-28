@@ -12,6 +12,6 @@ st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
 
 st.sidebar.markdown(
     """
-    potato 
+potato
     """
 )
