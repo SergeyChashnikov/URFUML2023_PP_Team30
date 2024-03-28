@@ -55,3 +55,15 @@ def interpreter(text: str, tokenizer, model):
     return decoded
 
 
+# Генератор. Передаём входной текст и параметры в модель
+# и получаем результат на выходе.
+def generate_quest(log_text_block, tokenizer, model_rut5, max_length_for_user):
+    inputs = tokenizer(log_text_block, return_tensors='pt')
+    with torch.no_grad():
+        hypotheses = model_rut5.generate(
+            **inputs,
+            num_beams=5,
+            min_length=1,
+            max_length=max_length_for_user,
+            no_repeat_ngram_size=3)
+    return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
