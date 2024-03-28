@@ -23,8 +23,9 @@ with components.spinner(constants.LANG_PACK.get("loading_model_text")):
 # Получаем состояние приложения
 state = session.get_state()
 
-# Рисуем основные компоненты приложения, используя состояние, то есть если мы ввели текст,
-# то сетим в состояние ключ file_uploader_disabled: True, и далее поле загрузки файлом которое
+# Рисуем основные компоненты приложения, используя состояние,
+# то есть если мы ввели текст, то сетим в состояние ключ
+# file_uploader_disabled: True, и далее поле загрузки файлом которое
 # следит за этим полем в состоянии - отключается,
 # и так же в обратном порядке для text_area с ключем text_area_disabled
 text_area_data = components.text_area(
@@ -44,8 +45,9 @@ criteria = text_area_data or file_data
 
 # Если все ок, то передаем в функцию процессинга, если нет, то пишем что не так
 if bool(criteria) and btn:
-    with components.spinner(text=constants.LANG_PACK.get("loading_result_text")):
-        res = model.process(f"simplify | {criteria}", tokenizer, model_rut5)
+    with components.spinner(
+            text=constants.LANG_PACK.get("loading_result_text")):
+        res = process(f"simplify | {criteria}", tokenizer, model_rut5)
 
     components.results(constants.LANG_PACK.get("result_text"), res)
 elif not bool(criteria) and btn:
@@ -54,10 +56,15 @@ elif not bool(criteria) and btn:
 st.sidebar.markdown(
     """
     # Приложение "Конспектор"
-    Создано в рамках Проектного практикума «Персональный помощник для студентов».
+    Создано в рамках Проектного практикума
+    «Персональный помощник для студентов».
 
-    **Цель проектной работы**: разработка приложения для написания кратких конспектов вводимого текста.
+    **Цель проектной работы**:
+    разработка приложения для написания кратких конспектов,
+    первода или генерации вопросов на основании вводимого текста.
 
-    Функцией приложения является сокращение объёма исходного текста с сохранением основных мыслей.
+    Функцией приложения является сокращение объёма исходного текста
+    с сохранением основных мыслей, перевод исходного текста,
+    или генерация вопросов на его основе
 """
 )

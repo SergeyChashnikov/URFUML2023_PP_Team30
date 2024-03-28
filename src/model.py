@@ -28,3 +28,12 @@ def process(criteria: str, tokenizer, model_rut5):
             no_repeat_ngram_size=3
         )
     return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
+
+
+def interpreter(text: str, tokenizer, model):
+    input_ids = tokenizer.encode(text, return_tensors="pt")
+    outputs = model.generate(input_ids)
+    decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    return decoded
+
+
