@@ -37,7 +37,7 @@ def interpreter(text: str, tokenizer, model):
     return decoded
 
 
-# Генератор. Передаём входной текст и параметры в модель 
+# Генератор. Передаём входной текст и параметры в модель
 # и получаем результат на выходе.
 def generate_quest(log_text_block, tokenizer, model_rut5, max_length_for_user):
     inputs = tokenizer(log_text_block, return_tensors='pt')

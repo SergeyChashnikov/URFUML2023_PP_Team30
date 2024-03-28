@@ -1,7 +1,6 @@
 import streamlit as st
-from app import session, components, constants
+from app import session, components, constants, questfunc
 import model
-import questfunc
 
 
 st.set_page_config(
@@ -12,8 +11,8 @@ session.init()
 
 # Рисуем шапку + описание
 components.header(
-    "Генератор вопросов",
-    "Задаём вопросы по исходному тексту",
+    constants.LANG_PACK.get("title_question"),
+    constants.LANG_PACK.get("subtitle_question"),
     constants.LANG_PACK.get("description"),
 )
 
@@ -59,12 +58,12 @@ if criteria is not None:
             text_len = 1
 
         if (text_len == 1):
-            st.text("Количество вопросов: 1")
+            st.text(constants.LANG_PACK.get("single_questions"))
             numb_of_quest = 1
         else:
             max_value = text_len+1
             numb_of_quest = st.slider(
-                "Количество вопросов:",
+                constants.LANG_PACK.get("number_of_questions"),
                 value=1,
                 min_value=1,
                 max_value=max_value,
@@ -72,7 +71,7 @@ if criteria is not None:
             )
 # Получаем от пользователя максимальную длину вопроса
         max_length = st.slider(
-            "Максимальная длина вопроса:",
+            constants.LANG_PACK.get("max_len_question"),
             value=32,
             min_value=1,
             max_value=64,
@@ -94,7 +93,7 @@ if bool(criteria) and btn:
 # Выводим результат
     components.results(
         constants.LANG_PACK.get("result_text"),
-        result_list
+        '\n'.join(result_list)
     )
 # Если текст не загружен сообщаем об ошибке
 elif not bool(criteria) and btn:

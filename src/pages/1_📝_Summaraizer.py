@@ -45,9 +45,8 @@ criteria = text_area_data or file_data
 
 # Если все ок, то передаем в функцию процессинга, если нет, то пишем что не так
 if bool(criteria) and btn:
-    with components.spinner(
-            text=constants.LANG_PACK.get("loading_result_text")):
-        res = process(f"simplify | {criteria}", tokenizer, model_rut5)
+    with components.spinner(text=constants.LANG_PACK.get("loading_result_text")):
+        res = model.process(f"simplify | {criteria}", tokenizer, model_rut5)
 
     components.results(constants.LANG_PACK.get("result_text"), res)
 elif not bool(criteria) and btn:
