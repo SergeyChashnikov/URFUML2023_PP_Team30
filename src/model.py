@@ -12,7 +12,7 @@ from transformers import (
 
 # Загружаем модель и кэшируем ее через декоратор
 @st.cache_resource
-def loadmodel():
+def loadmodel_summarization():
     tokenizer = T5Tokenizer.from_pretrained("cointegrated/rut5-base-multitask")
     model_rut5 = T5ForConditionalGeneration.from_pretrained(
         "cointegrated/rut5-base-multitask"
@@ -35,7 +35,7 @@ def loadmodel_translation_en_ru():
 
 
 # Процессинг. Передаем входной текст в модель и получаем результат обработки.
-def process(criteria: str, tokenizer, model_rut5):
+def processing_summarization(criteria: str, tokenizer, model_rut5):
     inputs = tokenizer(criteria, return_tensors="pt")
     with torch.no_grad():
         hypotheses = model_rut5.generate(
