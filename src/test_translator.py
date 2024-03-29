@@ -6,7 +6,7 @@ def test_translation():
     at = AppTest.from_file("pages/2_🌏_Translator.py")
     at.run(timeout=30)
 
-    text = 'Привет'
+    text = "Привет"
 
     # Вводим текст для перевода
     at.text_area[0].set_value(text).run()
@@ -15,7 +15,4 @@ def test_translation():
     at.button[0].click().run(timeout=60)
 
     # Проверяем, что результат перевода отображается на странице
-    assert (
-             at.markdown[1].value
-             == """Hello"""
-             )
+    assert at.markdown[1].value == """Hello"""
