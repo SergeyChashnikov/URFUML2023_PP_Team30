@@ -57,5 +57,3 @@ def interpreter(text: str, tokenizer, model):
                              no_repeat_ngram_size=5)
     decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return decoded
-
-
