@@ -50,7 +50,11 @@ def process(criteria: str, tokenizer, model_rut5):
 
 def interpreter(text: str, tokenizer, model):
     input_ids = tokenizer.encode(text, return_tensors="pt")
-    outputs = model.generate(input_ids)
+    outputs = model.generate(input_ids,
+                             num_beams=5,
+                             min_length=300,
+                             max_length=500,
+                             no_repeat_ngram_size=5)
     decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return decoded
 
